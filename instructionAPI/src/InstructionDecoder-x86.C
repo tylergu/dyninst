@@ -134,7 +134,7 @@ namespace Dyninst
 
 
     INSTRUCTION_EXPORT InstructionDecoder_x86::InstructionDecoder_x86(Architecture a) :
-      InstructionDecoderImpl(a, DyninstInternal),
+      InstructionDecoderImpl(a),
         decodedInstruction(NULL),
         locs(NULL),
         sizePrefixPresent(false),
