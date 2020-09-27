@@ -34,6 +34,7 @@
 #include "external/rose/rose-compat.h"
 #include "external/rose/powerpcInstructionEnum.h"
 #include "external/rose/armv8InstructionEnum.h"
+#include "boost/smart_ptr/make_shared.hpp"
 
 #include <iostream>
 
@@ -41,8 +42,7 @@ using namespace Dyninst;
 
 boost::shared_ptr<MachRegister::NameMap> MachRegister::names()
 {
-    static boost::shared_ptr<MachRegister::NameMap> store =
-       boost::shared_ptr<MachRegister::NameMap>(new MachRegister::NameMap);
+    static auto store = boost::make_shared<MachRegister::NameMap>();
     return store;
 }
 
