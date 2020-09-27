@@ -59,13 +59,19 @@ MachRegister::MachRegister(signed int r) :
 MachRegister::MachRegister(signed int r, const char *n) :
    reg(r)
 {
-	(*names())[r] = std::string(n);
+	auto& store = *names();
+	MachRegister::NameMap::accessor ac;
+	store.insert(ac, r);
+	ac->second = n;
 }
 
 MachRegister::MachRegister(signed int r, std::string n) :
 reg(r)
 {
-	(*names())[r] = n;
+	auto& store = *names();
+	MachRegister::NameMap::accessor ac;
+	store.insert(ac, r);
+	ac->second = n;
 }
 
 unsigned int MachRegister::regClass() const
@@ -129,9 +135,11 @@ MachRegisterVal MachRegister::getSubRegValue(const MachRegister& subreg,
 
 std::string MachRegister::name() const {
 	assert(names() != NULL);
-	NameMap::const_iterator iter = names()->find(reg);
-	if (iter != names()->end()) {
-		return iter->second;
+
+	auto const& store = *names();
+	MachRegister::NameMap::const_accessor ac;
+	if(store.find(ac, reg)) {
+		return ac->second;
 	}
 	return std::string("<INVALID_REG>");
 }

@@ -34,6 +34,7 @@
 
 #include "util.h"
 #include "boost/shared_ptr.hpp"
+#include "concurrent.h"
 
 #include <assert.h>
 #include <map>
@@ -71,7 +72,7 @@ namespace Dyninst
     private:
         signed int reg;
 
-        typedef std::map<signed int, std::string> NameMap;
+        using NameMap = dyn_c_hash_map<signed int, std::string>;
         static boost::shared_ptr<MachRegister::NameMap> names();
         void init_names();
     public:
