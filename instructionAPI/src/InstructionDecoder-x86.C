@@ -33,7 +33,7 @@
 #include "common/src/Types.h"
 #include "InstructionDecoder-x86.h"
 #include "Expression.h"
-#include "common/src/arch-x86.h"
+#include "arch-x86.h"
 #include "Register.h"
 #include "Dereference.h"
 #include "Immediate.h" 

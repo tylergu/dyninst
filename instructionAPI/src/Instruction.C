@@ -48,7 +48,7 @@
 #include <set>
 #include <functional>
 
-#include "common/src/arch-x86.h"
+#include "arch-x86.h"
 #include "dyninstversion.h"
 
 using namespace std;

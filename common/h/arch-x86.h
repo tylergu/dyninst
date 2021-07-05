@@ -34,21 +34,43 @@
 #ifndef _ARCH_X86_H
 #define _ARCH_X86_H
 
-#include "common/src/Types.h"
 #include <stdio.h>
 #include <set>
 #include <map>
 #include <vector>
+#include "dyntypes.h"
 #include "dyn_regs.h"
 #include "entryIDs.h"
-
-#include "common/src/ia32_locations.h"
 
 #if defined(i386_unknown_nt4_0)
 // disable VC++ warning C4800: (performance warning)
 // forcing 'unsigned int' value to bool 'true' or 'false'
 #pragma warning (disable : 4800)
 #endif
+
+// forward declaration 
+class ia32_locations;
+#include <stdint.h>
+#if defined(os_windows)
+			 /* nt ----------------------------- */
+#include <limits.h>
+#define I64_MAX  _I64_MAX
+#define UI64_MAX _UI64_MAX
+#define I64_MIN  _I64_MIN
+#define I32_MAX  _I32_MAX
+#define I32_MIN  _I32_MIN
+#define UI32_MAX  _UI32_MAX
+#else                              /* linux, freebsd ----------------- */
+#define I64_MAX  INT64_MAX
+#define UI64_MAX UINT64_MAX
+#define I64_MIN  INT64_MIN
+#define I32_MAX  INT32_MAX
+#define I32_MIN  INT32_MIN
+#define UI32_MAX UINT32_MAX
+#endif
+typedef unsigned int Register;
+typedef unsigned long Address;
+using Dyninst::Architecture;
 
 namespace NS_x86 {
 
@@ -1035,7 +1057,7 @@ COMMON_EXPORT Address get_target(const unsigned char *instr, unsigned type, unsi
 
 unsigned int swapBytesIfNeeded(unsigned int i);
 
-class instruction {
+class COMMON_EXPORT instruction {
  public:
     instruction(): type_(0), size_(0), ptr_(0), op_ptr_(0) {}
 

@@ -134,6 +134,8 @@
 // This include *must* come first in the file.
 #include "common/src/Types.h"
 
+#include "common/src/ia32_locations.h"
+
 #include <assert.h>
 #include <stdio.h>
 #include <map>
@@ -146,7 +148,7 @@
 #include "boost/assign/std/set.hpp"
 #include <boost/thread/lock_guard.hpp>
 #include <boost/thread/mutex.hpp>
-#include "common/src/arch-x86.h"
+#include "arch-x86.h"
 #include "dyn_regs.h"
 
 // #define VEX_DEBUG
